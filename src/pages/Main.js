@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useCallback} from "react";
 import MyContacts from "./contacts/MyContacts";
 
 const MainPage = ({history}) => {
-  const getUser = () => {
+  const getUser = useCallback(() => {
     let user = {};
     const localUser = localStorage.getItem('user')
     user = JSON.parse(localUser);
@@ -12,8 +12,8 @@ const MainPage = ({history}) => {
     } else {
       history.push('/login');
     }
-  }
-  debugger;
+  },[])
+
   const logout = (e) => {
     e.preventDefault();
     history.push('/logout');

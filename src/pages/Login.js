@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from "react-redux";
-import { withRouter } from "react-router-dom";
+// import { withRouter } from "react-router-dom";
 
 import {userLogin} from "../redux-composed";
 
@@ -30,4 +30,4 @@ const Login = ({ history }) => {
   )
 };
 
-export default withRouter(Login);
+export default Login;

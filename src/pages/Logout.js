@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useDispatch} from "react-redux";
 
-import { userLogout } from "../redux-composed";
+import { userLogout } from "../redux/redux-composed";
 import {withRouter} from "react-router-dom";
 
 const Logout = ({history}) => {

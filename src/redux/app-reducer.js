@@ -1,4 +1,4 @@
-import {userLogin} from "../redux-composed";
+import {userLogin} from "./redux-composed";
 
 export let initialState = {
   initialized: false,

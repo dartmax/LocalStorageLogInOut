@@ -1,32 +1,45 @@
+import { createStore, applyMiddleware } from "redux";
+import logger from "redux-logger";
+import thunk from "redux-thunk";
+
 export const initialState = {
   user: readUserFromLocalStorage(),
 };
 
 // Reducer
-export const userReducer = (state, { type, payload }) => {
+export const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case "USER_LOGIN":
       return {
-        user: payload
+        user: payload.role
       };
     case "USER_LOGOUT":
       return {
-        user: {},
+        user: null,
       };
     default:
       return state;
   }
 };
 
+// Store
+export const store = createStore(
+  reducer,
+  initialState,
+  applyMiddleware(thunk, logger)
+);
 
+export const selectIsAuth = (store) => {
+  return store.user.role
+}
 // Actions
-export const userLogin = (user) => dispatch => {
+export const userLogin = (role) => dispatch => {
   return timeoutPromise(1000)
     .then(() => (
       dispatch({
         type: "USER_LOGIN",
         payload: {
-          user: user.role,
+          role: role,
           token: "token7j34e8ffdjg348",
         }
       }))
@@ -44,10 +57,6 @@ export const userLogout = () => dispatch => {
   });
 };
 
-export const selectIsAuth = (state) => {
-  return state.user.user;
-}
-
 // Helpers
 const timeoutPromise = (ms) => {
   let ctr, rej;
@@ -63,7 +72,7 @@ const timeoutPromise = (ms) => {
 }
 
 // Read user from the localStorage
-export function readUserFromLocalStorage() {
+function readUserFromLocalStorage() {
   try {
     const serialized = localStorage.getItem('user');
     if (serialized === null) {
@@ -75,4 +84,3 @@ export function readUserFromLocalStorage() {
     return undefined;
   }
 }
-debugger;

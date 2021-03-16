@@ -1,25 +1,74 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useCallback, useEffect} from 'react'
+import {BrowserRouter as Router, Route, Redirect, BrowserRouter} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {connect} from "react-redux";
 
-function App() {
+import LoginPage from "./pages/Login";
+import LogoutPage from "./pages/Logout";
+import MainPage from "./pages/Main";
+import {compose} from "redux";
+import {withRouter} from "react-router";
+import {initializeApp} from "./redux/app-reducer";
+
+const PrivateRoute = ({ component: Component, ...rest}) =>  {
+
+  const loggedIn = useSelector((state) => Boolean(state.user));
+
+  if (!loggedIn) {
+    console.log("PrivateRoute: not logged in!")
+  }
+  else {
+    console.log("PrivateRoute: logged in")
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Route
+      {...rest}
+      render={props => (
+        !loggedIn ? (
+          <Redirect to={{ pathname: '/login', state: { from: props.location }
+          }}/>
+        ) : (
+          <Component {...props}/>
+        )
+      )}/>
   );
-}
+};
 
-export default App;
+const App = (props) => {
+  const catchAllUnhandledErrors = useCallback((e) => {
+    alert("promiseRejectionEvent")
+  }, [])
+
+  useEffect(() => {
+    props.initializeApp();
+  }, [props])
+
+  useEffect(() => {
+    window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
+  }, [catchAllUnhandledErrors])
+
+  return(
+    <Router>
+    <Route name="login" path="/login" component={LoginPage} />
+    <PrivateRoute name="logout" path="/logout" component={LogoutPage} />
+    <PrivateRoute name="main" path="/main" component={MainPage} />
+    <Redirect from="/" to="main" />
+  </Router>
+  )
+};
+
+let AppContainer = compose(
+  withRouter,
+  connect(null, {initializeApp}))(App);
+
+
+const ContactListApp = () => {
+  return (
+    <BrowserRouter>
+        <AppContainer/>
+    </BrowserRouter>
+  )
+}
+debugger;
+export default ContactListApp;

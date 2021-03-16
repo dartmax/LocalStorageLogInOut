@@ -8,14 +8,15 @@ const MainPage = ({history}) => {
   const getUser = () => {
     let user = {};
     const localUser = localStorage.getItem('user')
-    if (localUser) {
-      user = JSON.parse(localUser);
-      return user.payload.role.role;
+    user = JSON.parse(localUser);
+
+    if (!!user.payload.role) {
+      return user.payload.role.role
+    } else {
+      history.push('/login');
     }
   }
-
-  const myRole = useSelector(selectIsAuth)
-
+  debugger;
   const logout = (e) => {
     e.preventDefault();
     history.push('/logout');
@@ -30,4 +31,4 @@ const MainPage = ({history}) => {
   );
 };
 
-export default withRouter(MainPage)
+export default MainPage;

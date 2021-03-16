@@ -11,7 +11,7 @@ export const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case "USER_LOGIN":
       return {
-        user: payload.role
+        user: payload
       };
     case "USER_LOGOUT":
       return {

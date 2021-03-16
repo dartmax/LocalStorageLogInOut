@@ -1,7 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
-import {selectIsAuth} from "../redux-composed";
-import {useSelector} from "react-redux";
 import MyContacts from "./contacts/MyContacts";
 
 const MainPage = ({history}) => {

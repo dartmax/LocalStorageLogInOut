@@ -9,7 +9,7 @@ const Logout = ({history}) => {
 
   useEffect(() => {
       dispatch(userLogout())
-  }, []);
+  }, [dispatch]);
 
   const goBack = (e) => {
     e.preventDefault();

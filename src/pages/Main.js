@@ -12,7 +12,7 @@ const MainPage = ({history}) => {
     } else {
       history.push('/login');
     }
-  },[])
+  },[history])
 
   const logout = (e) => {
     e.preventDefault();

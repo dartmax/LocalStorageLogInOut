@@ -11,7 +11,7 @@ export default function Card(props) {
       </div>
       <Avatar img={props.imgUrl} />
       <div className="content">
-        <Detail details={props.phone} />
+        <h4>Call: <button>{props.phone}</button></h4>
         <Detail details={props.email} />
       </div>
     </div>

@@ -53,7 +53,7 @@ const App = (props) => {
     <Route name="login" path="/login" component={LoginPage} props={props}/>
     <PrivateRoute name="logout" path="/logout" component={LogoutPage} props={props} />
     <PrivateRoute name="main" path="/main" component={MainPage} props={props} />
-    <Redirect from="/" to="login" props={props} />
+    <Redirect from="/" to="/login" props={props} />
   </Router>
   )
 };

@@ -10,7 +10,7 @@ Practice of using React, Redux and related npm packages, create Phone Contacts u
     * Authorization through and logout<br/>
       Free Guest Log-In:<br/>
       Just Any Name
-*Main Phone Contacts with photo
+* Main Phone Contacts with photo
 
 ### `Technologies:`
 - Main:

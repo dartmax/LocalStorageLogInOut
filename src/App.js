@@ -70,5 +70,5 @@ const ContactListApp = () => {
     </BrowserRouter>
   )
 }
-debugger;
+
 export default ContactListApp;

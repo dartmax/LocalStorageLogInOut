@@ -23,5 +23,5 @@ const Logout = ({history}) => {
     </div>
   )
 };
-debugger;
+
 export default withRouter(Logout);

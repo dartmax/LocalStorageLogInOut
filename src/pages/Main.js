@@ -13,7 +13,7 @@ const MainPage = ({history}) => {
       return user.payload.role.role;
     }
   }
-debugger;
+
   const myRole = useSelector(selectIsAuth)
 
   const logout = (e) => {

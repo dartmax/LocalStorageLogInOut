@@ -29,5 +29,5 @@ const Login = ({ history }) => {
     </form>
   )
 };
-debugger;
+
 export default withRouter(Login);
